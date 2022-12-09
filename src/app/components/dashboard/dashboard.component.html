@@ -1,0 +1,96 @@
+<div class="container-fluid">
+    <div class="props">
+    <input type="text" placeholder="Filter musics" [(ngModel)]="term" appFocusDirective>
+      <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCustomer">Add new
+          music</button>
+        </div>
+      <!-- Modal -->
+      <div class="modal fade" id="addCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Music</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+  
+  
+                      <form [formGroup]="musicDetails">
+                          <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Name:</label>
+                              <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+                          </div>
+                          <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Path:</label>
+                              <input type="text" formControlName="path" class="form-control" id="path" aria-describedby="emailHelp">
+                          </div>
+                          
+  
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="addMusic()">Add music</button>
+                          </div>
+                      </form>
+  
+  
+                  </div>
+  
+              </div>
+          </div>
+      </div>
+  
+    
+    <!-- Put Customer Modal -->
+    <div class="modal fade" id="editCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Music</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+  
+              <form [formGroup]="musicDetails">
+                  <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Name:</label>
+                      <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Path:</label>
+                      <input type="text" formControlName="path" class="form-control" id="path" aria-describedby="emailHelp">
+                  </div>
+  
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="updateMusic()">Update</button>
+                  </div>
+              </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Path</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let music of musicList | filter : term">
+              <td>{{music.id}}</td>
+              <td>{{music.name}}</td>
+              <td>{{music.path}}</td>
+              <td>
+                  <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editCustomer" (click)="editMusic(music)" >Edit</button>
+                  <button type="button" class="btn btn-outline-danger" (click)="deleteMusic(music)">Delete</button>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+  
+  </div>
